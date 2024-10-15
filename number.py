@@ -37,3 +37,14 @@ def isInt(val):
     
 def isFloat(val):
     return isNumber(val) and not isInt(val)
+
+
+###############################################################################
+## Converts a string to an integer, if the string does not represent an integer
+##  it will return None.
+
+def parseInt(value):
+    try:
+        return int(value)
+    except ValueError:
+        return None
