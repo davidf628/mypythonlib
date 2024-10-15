@@ -1,4 +1,15 @@
-import re
+## VERSION == 1.1.0
+
+import re, math
+
+###############################################################################
+##
+## Functions:
+##   - isNumber
+##   - isInt
+##   - isFloat
+##   - parseInt
+##   - rnd
 
 ###############################################################################
 ##
@@ -48,3 +59,31 @@ def parseInt(value):
         return int(value)
     except ValueError:
         return None
+    
+
+def rnd(n, decimals=0):
+    """Replaces Python's rounding system and uses the basic rounding
+    rule of 0.5 or higher, round up. Also allows for rounding an
+    entire array all at once
+    """
+    
+    def round_half_up(n, decimals=0):
+        multiplier = 10 ** decimals
+        return math.floor(n*multiplier + 0.5) / multiplier
+    
+    def round_val(n, decimals=0):
+        if decimals == 0:
+            rounded_abs = int(round_half_up(abs(n), decimals))
+            return int(math.copysign(rounded_abs, n))
+        else:
+            rounded_abs = round_half_up(abs(n), decimals)
+            return math.copysign(rounded_abs, n)      
+    
+    # if a list of numbers is provided, round all values
+    if type(n) == 'list':
+        rounded_values = []
+        for v in n:
+            rounded_values.append(round_val(v), decimals)
+        return rounded_values
+    else:
+        return round_val(n, decimals)
