@@ -2,7 +2,7 @@
 
 import csv
 
-def load_csv_dict(csvfile):
+def load_dict(csvfile: str):
     """Loads a csv formatted file into an array of dict, which
     uses the first line as the keys, and each line of the file
     as values. Each line will get it's own dict structure and
@@ -22,13 +22,38 @@ def load_csv_dict(csvfile):
         csv_reader = csv.reader(f, delimiter=',')
 
         # Get the first line
-        header_row = next(csv_reader)
-        print(f'header_row == {header_row}')
+        headers = next(csv_reader)
 
         for row in csv_reader:
             new_record = {}
             for i, value in enumerate(row):
-                new_record[header_row[i]] = value
+                new_record[headers[i]] = value
             dict_array.append(new_record)
             
     return dict_array
+
+def rename_column(old_name: str, new_name: str, data: list): 
+    """_summary_
+
+    Args:
+        old_name (str): _description_
+        new_name (str): _description_
+        data (list): _description_
+
+    Returns:
+        [dict]: modified set of data with a column renamed
+    """
+    
+    for record in data:
+        record[new_name] = record[old_name]
+        del record[old_name]
+    
+    return data
+
+
+def format_column(col_name, func, data):
+    
+    for record in data:
+        record[col_name] = func(record[col_name])
+    
+    return data
