@@ -32,7 +32,7 @@ def load_dict(csvfile: str):
             
     return dict_array
 
-def rename_column(old_name: str, new_name: str, data: list): 
+def rename_dictcol(old_name: str, new_name: str, data: list): 
     """_summary_
 
     Args:
@@ -51,7 +51,7 @@ def rename_column(old_name: str, new_name: str, data: list):
     return data
 
 
-def format_column(col_name, func, data):
+def format_dictcol(col_name, func, data):
 
     for record in data:
         record[col_name] = func(record[col_name])
