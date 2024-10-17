@@ -1,5 +1,5 @@
 ## VERSION == 1.0.0
-from lib import number
+import number
 import json, zlib, base64
 
 ###############################################################################
