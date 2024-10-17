@@ -106,3 +106,5 @@ def remove_file(dir, filename):
     path = os.path.join(dir, filename)
     if os.path.exists(path):
         os.remove(path)
+
+
