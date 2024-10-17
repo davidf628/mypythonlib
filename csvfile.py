@@ -2,7 +2,7 @@
 
 import csv
 
-def load_dict(csvfile: str):
+def load_dictarray(csvfile: str):
     """Loads a csv formatted file into an array of dict, which
     uses the first line as the keys, and each line of the file
     as values. Each line will get it's own dict structure and
