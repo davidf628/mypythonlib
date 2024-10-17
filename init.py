@@ -6,6 +6,6 @@ def get_dependency(script, path=''):
         script = os.path.join(path, script)
     website += script
     if not os.path.exists(script):
-        response = requests.get(website)
+        response = requests.get(f'{website}{script}')
         with open(script, mode='wb') as file:
             file.write(response.content)
