@@ -1,13 +1,13 @@
 import os, requests
 
 def get_dependency(script, path=''):
-    website = 'https://raw.githubusercontent.com/davidf628/mypythonlib/refs/heads/main/'
+    webloc = 'https://raw.githubusercontent.com/davidf628/mypythonlib/refs/heads/main/' + script
     if script != '':
         script = os.path.join(path, script)
-    website += script
     if not os.path.exists(script):
-        response = requests.get(f'{website}{script}')
-        if response == '404: Not Found':
-            SystemExit(f'Dependency: {website} not found')
+        response = requests.get(webloc)
+        print(f'webloc == {webloc}')
+        if str(response) == '<Response [404]>':
+            SystemExit(f'Dependency: {webloc} not found')
         with open(script, mode='wb') as file:
             file.write(response.content)
