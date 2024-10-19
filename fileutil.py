@@ -97,3 +97,11 @@ def remove_file(dir, filename):
         os.remove(path)
 
 
+def file_is_open(filename):
+
+    if os.path.exists(filename):
+        try:
+            os.rename(filename, filename)
+            return False
+        except OSError:
+            return True
