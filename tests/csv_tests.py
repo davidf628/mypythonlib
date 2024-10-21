@@ -1,14 +1,17 @@
-import sys, math, os
+import sys, os
 sys.path.append('../mypythonlib')
-import mycsv
+import csvfile
 
 def test():
-    test_load_csv_dict()
+    test_csvdiff()
 
 def test_load_csv_dict():
-    data = mycsv.load_csv_dict('videodata.csv')
+    data = csvfile.load_csv_dict('videodata.csv')
     print(data)
     
+def test_csvdiff():
+    csvfile.csvdiff('videodata.csv', 'videodata2.csv', 'd2l_name')
+
 if __name__ == '__main__':
     
         ## Change the current working directory to the script directory
