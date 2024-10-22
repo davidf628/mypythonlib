@@ -1,4 +1,4 @@
-## VERSION == 1.0.0
+## VERSION == 1.1.0
 
 import csv
 import dictarray as da
@@ -32,6 +32,16 @@ def load_dictarray(csvfile: str):
             dict_array.append(new_record)
             
     return dict_array
+
+
+def _load_listarray(csvfile: str):
+    None
+
+
+def write_listarry(data: list, filename: str):
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
 
 ###############################################################################
 # Compares two different CSV files to see if any data between them is
