@@ -10,7 +10,7 @@ def test_load_csv_dict():
     print(data)
     
 def test_csvdiff():
-    csvfile.csvdiff('videodata.csv', 'videodata2.csv', 'd2l_name')
+    csvfile.csvdiff('csvfile1.csv', 'csvfile2.csv')
 
 if __name__ == '__main__':
     
