@@ -38,7 +38,7 @@ def _load_listarray(csvfile: str):
     None
 
 
-def write_listarry(data: list, filename: str):
+def write_listarray(data: list, filename: str):
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerows(data)
