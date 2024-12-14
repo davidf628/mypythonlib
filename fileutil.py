@@ -1,65 +1,90 @@
-# VERSION = 1.0.1
+# VERSION = 1.1.0
 
 import os, sys
 from pathlib import Path
- 
 
-###############################################################################
-## Tests a set of paths that are directories and checks to see if any of them
-##   are valid. This is especially useful for finding a base directory (like
-##   a one-drive folder) on different systems
-##  
+# 12/14/24 - changed name from 'select_valid_path'    
+def select_valid_folder(folder_options: (list | str)) -> (str | None):
+    '''
+    Checks to see if any folder_options are valid folders on the current
+    machine. This is especially useful for finding a root one-drive folder.
     
-def select_valid_path(paths):
+    folder_options -- An array of string containing paths to the different 
+      folders to check. This can also be a single string.
+    
+    returns -- A string that is the first valid folder within folder_options,
+      or None if no valid folders existed.
+    '''
 
-    if isinstance(paths, str):
-        paths = [ paths ]
+    if isinstance(folder_options, str):
+        folder_options = [ folder_options ]
 
-    for loc in paths:
-        if os.path.isdir(loc):
-            return loc
+    for folder in folder_options:
+        if os.path.isdir(folder):
+            return folder
+        
+    return None
+
+    
+def select_valid_file(file_options):
+    '''
+    Checks to see if any file_options are valid files on the current
+    machine.
+    
+    file_options -- An array of string containing paths to the different
+      files to check. This can also be a single string.
+    
+    returns -- A string that is the first valid file within file_options,
+      or None if no valid files existed.
+    '''
+    if isinstance(file_options, str):
+        file_options = [ file_options ]
+
+    for file in file_options:
+        if os.path.exists(file):
+            return file
+        
     return None
 
 
-###############################################################################
-## Tests a set of filepaths and checks to see if any of them are valid.
-##  
-    
-def select_valid_file(filepaths):
-
-    if isinstance(filepaths, str):
-        filepaths = [ filepaths ]
-
-    for loc in filepaths:
-        if os.path.exists(loc):
-            return loc
-    return None
-
+# deprecated on 12/14/24 since this is basically the same function as get_file_path
 
 ###############################################################################
 ## Tests to see if a file exists within a given root path that is known 
 ##   already to exist. The filename can contain subdirectories, and it the 
 ##   function will adjust for the platform
 
-def file_exists_in_path(path, filename):
+# def file_exists_in_path(path, filename):
 
-    filepath = make_filepath(path, filename)
+#     filepath = get_file_path(path, filename)
 
-    if os.path.exists(filepath):
-        return filepath
+#     if os.path.exists(filepath):
+#         return filepath
+#     else:
+#         return None
+
+
+
+# 12/14/2024 - renamed from 'make_filepath'
+def get_file_path(base_path: str, file_loc: str) -> (str | None):
+    '''
+    Takes a base_path such as /usr/person and another file_loc, which might 
+    look like /subfolder/file.txt, and creates a string that is an operating 
+    system independent path to the file. 
+
+    base_path -- a folder location on the current machine that is valid.
+    file_loc -- a path to a file that exists within the base_path.
+
+    returns -- a string with base_path and file_loc joined into a single path
+      if the file exists, otherwise it will return None.
+    '''
+    path_parts = file_loc.split('/')
+    file_path = os.path.join(base_path, *path_parts)
+
+    if os.path.exists(file_path):
+        return file_path
     else:
         return None
-
-
-###############################################################################
-## Get a reference to a file path which is operating system independent. 
-
-def make_filepath(path, filename):
-
-    path_parts = filename.split('/')
-    filepath = os.path.join(path, *path_parts)
-
-    return filepath
 
 def makepath(basepath: str, target: str, create :bool=False, folder :bool=True) -> str:
     """Creates a path as a string, for a file or folder. If the file or folder
