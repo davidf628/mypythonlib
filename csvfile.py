@@ -34,13 +34,13 @@ def load_dictarray(csvfile: str):
     return dict_array
 
 
-def load_2darray(csvfile: str):
+def load_listarray(csvfile: str):
     with open(csvfile, 'r') as file:
         reader = csv.reader(file)
         return [row for row in reader]
 
 
-def write_2darray(data: list, filename: str):
+def write_listarray(data: list, filename: str):
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerows(data)
