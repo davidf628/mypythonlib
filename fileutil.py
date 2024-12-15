@@ -64,27 +64,33 @@ def select_valid_file(file_options):
 #         return None
 
 
-
 # 12/14/2024 - renamed from 'make_filepath'
-def get_file_path(base_path: str, file_loc: str) -> (str | None):
+def get_file_path(base_path: str, file_loc: str, check_exists=True) -> (str | None):
     '''
     Takes a base_path such as /usr/person and another file_loc, which might 
     look like /subfolder/file.txt, and creates a string that is an operating 
     system independent path to the file. 
 
     base_path -- a folder location on the current machine that is valid.
-    file_loc -- a path to a file that exists within the base_path.
+    file_loc -- a path to a file within the base_path.
+    check_exists -- tests to see if the path exists or not, if it doesn't
+      then None is returned
 
     returns -- a string with base_path and file_loc joined into a single path
-      if the file exists, otherwise it will return None.
+      if the file exists, otherwise it will return None; if check_exists is
+      set to False, then it will return the path regardless of existence
     '''
     path_parts = file_loc.split('/')
     file_path = os.path.join(base_path, *path_parts)
 
+    if not check_exists:
+        return file_path
+    
     if os.path.exists(file_path):
         return file_path
     else:
         return None
+    
 
 def makepath(basepath: str, target: str, create :bool=False, folder :bool=True) -> str:
     """Creates a path as a string, for a file or folder. If the file or folder
