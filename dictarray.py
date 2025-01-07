@@ -1,4 +1,8 @@
-## VERSION == 1.0.0
+## VERSION == 1.1.0
+
+def test():
+    test_rename_col()
+
 
 def rename_col(old_name: str, new_name: str, data: list): 
     """_summary_
@@ -11,12 +15,23 @@ def rename_col(old_name: str, new_name: str, data: list):
     Returns:
         [dict]: modified set of data with a column renamed
     """
-    
+
     for record in data:
-        record[new_name] = record[old_name]
-        del record[old_name]
+        if old_name in record.keys():
+            record[new_name] = record[old_name]
+            del record[old_name]
     
     return data
+
+
+def test_rename_col():
+    mockdata = [ { 'person': 'David', 'age': 55 },
+                 { 'person': 'John', 'age': 24 }]
+    
+    rename_col('person', 'name', mockdata)
+    rename_col('gender', 'bloodtype', mockdata)
+
+    print(mockdata)
 
 
 def format_col(col_name, func, data):
@@ -47,3 +62,7 @@ def query(data, /, select, where, equals):
             else:
                 return record[select]
     return None
+
+
+if __name__ == '__main__':
+    test()
