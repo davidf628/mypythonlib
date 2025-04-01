@@ -23,8 +23,13 @@ def load_dictarray(csvfile: str):
         csv_reader = csv.reader(f, delimiter=',')
 
         # Get the first line
-        headers = next(csv_reader)
-
+        try:
+            headers = next(csv_reader)
+        except StopIteration:
+            # No data in the file
+            return dict_array
+        
+        # Get the rest of the data
         for row in csv_reader:
             new_record = {}
             for i, value in enumerate(row):
