@@ -34,14 +34,14 @@ def get_dependency(script: str, path: str='') -> None:
 
         local_version = get_script_version(path, script)
 
-        if online_version > local_version:
+        if (online_version > local_version) or local_version == None:
             download_online_resource(webloc, scriptloc)
         if online_version < local_version:
             print(f'\n\n-- WARNING -- Local script {scriptloc} has a higher version number than online')
     
     else:
         download_online_resource(webloc, scriptloc)
-        
+
 
 ###############################################################################
 # Looks through a script for a line that contains $VERSION = a.b.c and
