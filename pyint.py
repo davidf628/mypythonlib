@@ -1,4 +1,4 @@
-# $VERSION = 1.0.0
+# $VERSION = 1.0.1
 
 import math
 import os
@@ -236,7 +236,7 @@ def comb(n, r):
         raise ArithmeticError('n must be greater than or equal to r for a ' \
                               'combination')
     else:
-        return permutation(n, r) // factorial(r)
+        return itertools.permutation(n, r) // itertools.factorial(r)
 
 
 ######################################
@@ -249,7 +249,7 @@ def perm(n, r):
                               'permutation.')
 
     if n == r:
-        return factorial(n)
+        return itertools.factorial(n)
     else:
         d = n - r
         perm = 1
@@ -274,7 +274,7 @@ def fact(n):
     if n == 0:
         return 1
     
-    return n * factorial(n - 1)
+    return n * itertools.factorial(n - 1)
 
 
 ######################################
