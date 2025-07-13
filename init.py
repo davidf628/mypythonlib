@@ -1,4 +1,4 @@
-# $VERSION == 2.0.3
+# $VERSION == 2.0.4
 
 import os, requests, re
 
@@ -36,13 +36,13 @@ def get_dependency(script: str, path: str='') -> None:
 
         if online_version > local_version:
             download_online_resource(webloc, scriptloc)
-            print(f' - \nUpdating local library {scriptloc} - \n')
+            print(f'\n - Updating local library {scriptloc} - \n')
         elif online_version < local_version:
             print(f'\n\n-- WARNING: Local script {scriptloc} has a higher version number than online')
     
     else:
         download_online_resource(webloc, scriptloc)
-        print(f' - \nUpdating local library {scriptloc} - \n')
+        print(f'\n - Updating local library {scriptloc} - \n')
 
 
 ###############################################################################
