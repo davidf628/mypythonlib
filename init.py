@@ -1,4 +1,4 @@
-# $VERSION = 2.0.3
+# $VERSION == 2.0.3
 
 import os, requests, re
 
@@ -84,7 +84,7 @@ def get_script_version(path: str, script: str) -> tuple:
     return (0,0,0)
 
 def extract_version(line: str) -> tuple | None:
-    pattern = r'\$VERSION\s*==\s*(\d+)\.(\d+)\.(\d+)'
+    pattern = r'\$VERSION\s*={1,2}\s*(\d+)\.(\d+)\.(\d+)'
     match = re.search(pattern, line)
     if match:
         return tuple(map(int, match.groups()))

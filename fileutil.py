@@ -1,4 +1,4 @@
-# $VERSION = 1.1.0
+# $VERSION == 1.1.0
 
 import os, sys
 from pathlib import Path
