@@ -1,4 +1,4 @@
-# $VERSION = 2.0.2
+# $VERSION = 2.0.3
 
 import os, requests, re
 
@@ -24,7 +24,7 @@ def get_dependency(script: str, path: str='') -> None:
         response.raise_for_status()
         online_version = get_script_version(webpath, script)
     except requests.exceptions.HTTPError:
-        print(f'\n\n -- WARNING: Resource URL {webloc} not found.')
+        SystemExit(f'\n\n -- ERROR: Resource URL {webloc} not found.')
     except requests.exceptions.RequestException:
         exit() # just assume there is no internet connection
 
