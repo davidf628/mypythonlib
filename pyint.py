@@ -1,3 +1,5 @@
+# $VERSION = 1.0.0
+
 import math
 import os
 import sys

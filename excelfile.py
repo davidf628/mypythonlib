@@ -1,3 +1,5 @@
+# $VERSION == 1.0.0
+
 from openpyxl import load_workbook
 
 def load_dictarray(wbfile):

@@ -1,5 +1,5 @@
 
-## VERSION = 2.1.0
+## $VERSION = 2.1.0
 ## LAST_UPDATE = 10/6/2025
 
 import smtplib
