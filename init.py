@@ -34,10 +34,10 @@ def get_dependency(script: str, path: str='') -> None:
 
         local_version = get_script_version(path, script)
 
-        if local_version == None or (online_version > local_version):
+        if online_version > local_version:
             download_online_resource(webloc, scriptloc)
             print(f' - \nUpdating local library {scriptloc} - \n')
-        if online_version < local_version:
+        elif online_version < local_version:
             print(f'\n\n-- WARNING: Local script {scriptloc} has a higher version number than online')
     
     else:
@@ -47,11 +47,11 @@ def get_dependency(script: str, path: str='') -> None:
 
 ###############################################################################
 # Looks through a script for a line that contains $VERSION = a.b.c and
-#  returns the tuple (a,b,c). If no version information is found, then None is 
-#  returned. You can look for this in an online file if path is a URL, or you
-#  can check a file on the computer if path is a directory
+#  returns the tuple (a,b,c). If no version information is found, then version
+#  (0,0,0) is returned. You can look for this in an online file if path is a 
+#  URL, or you can check a file on the computer if path is a directory
 
-def get_script_version(path: str, script: str) -> tuple | None:
+def get_script_version(path: str, script: str) -> tuple:
     web_resource = path.startswith('http')
 
     # get data from file online
@@ -78,6 +78,10 @@ def get_script_version(path: str, script: str) -> tuple | None:
         version = extract_version(line)
         if version != None:
             return version
+        
+    # if no version was found, just send back (0,0,0) as a default
+    # so no comparisons against None are made
+    return (0,0,0)
 
 def extract_version(line: str) -> tuple | None:
     pattern = r'\$VERSION\s*==\s*(\d+)\.(\d+)\.(\d+)'
